@@ -24,6 +24,23 @@ const NavBar = () => {
         </div>
       );
     }
+    if (env === 'company' && loggedIn) {
+      return (
+        <div className="navbar">
+          <ul>
+            <li>
+              <Link to="/company/offers">Mes Offres</Link>
+            </li>
+            <li>
+              <Link to="company/applicants">Mes candidatures</Link>
+            </li>
+            <li>
+              <Link to="/company/meetings">Mes RDV</Link>
+            </li>
+          </ul>
+        </div>
+      );
+    }
     return <></>;
   };
 

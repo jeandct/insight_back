@@ -7,11 +7,11 @@ const Home = () => {
 
   return (
     <div>
-      <Link to="/company/login" onClick={() => setEnvironment('company')}>
+      <Link to="/login" onClick={() => setEnvironment('company')}>
         Espace Employeur
       </Link>
       <p>{environment}</p>
-      <Link to="/candidate/login" onClick={() => setEnvironment('candidate')}>
+      <Link to="/login" onClick={() => setEnvironment('candidate')}>
         Espace Candidat
       </Link>
     </div>

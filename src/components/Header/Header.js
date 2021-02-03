@@ -36,7 +36,7 @@ export default function Header() {
   } = useContext(UserContext);
 
   const handleCandidateLogout = () => {
-    API.get('/auth/candidates/logout').then(() => {
+    API.get(`/auth/${environment}/logout`).then(() => {
       setEnvironment(null);
       setLoggedIn(false);
       setUserDetails({});
@@ -44,17 +44,15 @@ export default function Header() {
     });
   };
 
-  const showLogin = (env) => {
-    if (env === 'candidate' && loggedIn) {
+  const showLogin = () => {
+    if (loggedIn) {
       return (
         <Button color="inherit" onClick={handleCandidateLogout}>
           Déconnexion
         </Button>
       );
     }
-    if (env === 'company') {
-      return <Button color="inherit">Login</Button>;
-    }
+
     return <></>;
   };
 

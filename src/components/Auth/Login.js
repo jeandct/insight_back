@@ -15,8 +15,8 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import API from '../../../services/API';
-import { UserContext } from '../../../contexts/UserContext';
+import API from '../../services/API';
+import { UserContext } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,20 +49,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
-  const { setUserDetails, setLoggedIn } = useContext(UserContext);
+  const { setUserDetails, setLoggedIn, environment } = useContext(UserContext);
   const { paper, avatar, form, submit } = useStyles();
   //   const { addToast } = useToasts();
   const history = useHistory();
   const { register, handleSubmit } = useForm({ mode: 'onBlur' });
 
   const handleRedirect = () => {
-    history.push(`/candidate/feed`);
+    history.push(`/`);
   };
 
   const handleSubmitUserLogin = async (data) => {
     console.log(data);
     try {
-      const res = await API.post('/auth/candidates/login', data);
+      const res = await API.post(`/auth/${environment}/login`, data);
       await setUserDetails(res.data);
       await setLoggedIn(!!res.data);
       handleRedirect();
