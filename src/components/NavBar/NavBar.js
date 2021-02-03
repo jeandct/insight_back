@@ -7,7 +7,7 @@ const NavBar = () => {
   const { environment, loggedIn } = useContext(UserContext);
 
   const showNavBar = (env) => {
-    if (env === 'candidate' && loggedIn) {
+    if (env === 'candidates' && loggedIn) {
       return (
         <div className="navbar">
           <ul>
@@ -24,7 +24,7 @@ const NavBar = () => {
         </div>
       );
     }
-    if (env === 'company' && loggedIn) {
+    if (env === 'companies' && loggedIn) {
       return (
         <div className="navbar">
           <ul>

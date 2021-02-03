@@ -9,6 +9,7 @@ import Footer from './Footer/Footer';
 import NavBar from './NavBar/NavBar';
 import CV from './Candidates/CV';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute';
+import Offers from './Companies/Offers';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <NavBar />
             <Switch>
               <ProtectedRoute exact path="/" component={Feed} />
+              <Route path="/company/offers" component={Offers} />
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/candidate/feed" component={Feed} />

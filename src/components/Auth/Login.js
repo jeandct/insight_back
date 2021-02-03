@@ -60,7 +60,6 @@ const SignIn = () => {
   };
 
   const handleSubmitUserLogin = async (data) => {
-    console.log(data);
     try {
       const res = await API.post(`/auth/${environment}/login`, data);
       await setUserDetails(res.data);
