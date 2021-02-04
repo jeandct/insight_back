@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useToasts } from 'react-toast-notifications';
+import SaveIcon from '@material-ui/icons/Save';
+import Button from '@material-ui/core/Button';
 import API from '../../services/API';
 import OffersEditor from './OffersEditor';
+
 import { UserContext } from '../../contexts/UserContext';
 import './Offers.scss';
 
@@ -10,6 +14,7 @@ const Offers = () => {
   const { register, handleSubmit } = useForm();
   const { userDetails } = useContext(UserContext);
   const history = useHistory();
+  const { addToast } = useToasts();
 
   const [editorContent, setEditorContent] = useState(
     "<p>Commencer à rédiger votre offre d'emploi</p>"
@@ -21,7 +26,11 @@ const Offers = () => {
         ...data,
         text: editorContent,
       });
-      history.push('/company/offers');
+      addToast('Votre offre a été enregistrée !', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      history.push('/companies/offers');
     } catch (err) {
       console.error(err);
     }
@@ -29,8 +38,8 @@ const Offers = () => {
 
   return (
     <div className="offers-editor">
-      <h2>Créer une offre d'emploi</h2>
-      <form noValidate onSubmit={handleSubmit(handleOfferSubmit)}>
+      <h2>Créer votre offre d'emploi</h2>
+      <form noValidate>
         <label htmlFor="title">
           <input
             type="text"
@@ -55,7 +64,16 @@ const Offers = () => {
             setEditorContent={setEditorContent}
           />
         </div>
-        <input type="submit" value="Sauvegarder" />
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          // className={classes.button}
+          onClick={handleSubmit(handleOfferSubmit)}
+          startIcon={<SaveIcon />}
+        >
+          Enregistrer
+        </Button>
       </form>
     </div>
   );

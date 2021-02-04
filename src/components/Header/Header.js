@@ -68,8 +68,13 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            InsightJobs
+          <Typography
+            variant="h6"
+            className={classes.title}
+            style={{ cursor: 'pointer' }}
+            onClick={() => history.push('/')}
+          >
+            Insight Jobs
           </Typography>
           {showLogin(environment)}
         </Toolbar>

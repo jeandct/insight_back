@@ -5,6 +5,7 @@ import { useToasts } from 'react-toast-notifications';
 import { Button } from '@material-ui/core';
 import { UserContext } from '../../contexts/UserContext';
 import API from '../../services/API';
+import './Offers.scss';
 
 const OfferView = (props) => {
   const { match } = props;
@@ -39,16 +40,18 @@ const OfferView = (props) => {
   }, []);
 
   return (
-    <div>
+    <>
       <h2>{offerDetail.title}</h2>
-      <h3>{offerDetail.location}</h3>
-      {ReactHtmlParser(offerDetail.text)}
+      <h3>
+        {offerDetail.company} - {offerDetail.location}
+      </h3>
+      <div className="offer-container">{ReactHtmlParser(offerDetail.text)}</div>
       {environment === 'candidates' && (
         <Button variant="contained" color="primary" onClick={apply}>
           Postuler Maintenant
         </Button>
       )}
-    </div>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import API from '../../services/API';
 import { UserContext } from '../../contexts/UserContext';
 
 const useStyles = makeStyles({
@@ -36,26 +37,35 @@ const useStyles = makeStyles({
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-const OffersTable = ({ offersList }) => {
+const OffersTable = ({ offersList, toggleList, setToggleList }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { environment } = useContext(UserContext);
+  const { environment, userDetails } = useContext(UserContext);
 
-  function createData(title, location, id) {
-    return { title, location, id };
+  function createData(title, location, id, company) {
+    return { title, location, id, company };
   }
 
   const rows = offersList.map((offer) => {
-    return createData(offer.title, offer.location, offer.id);
+    return createData(offer.title, offer.location, offer.id, offer.company);
   });
+
+  const deleteCampaign = (id) => {
+    API.delete(`/companies/${userDetails.id}/offers/${id}`).then(() =>
+      setToggleList(!toggleList)
+    );
+  };
 
   return (
     <TableContainer className={classes.root} component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow className={classes.head}>
-            <TableCell className={classes.headCell}>Titre</TableCell>
+            {environment === 'candidates' && (
+              <TableCell className={classes.headCell}>Entreprise</TableCell>
+            )}
+            <TableCell className={classes.headCell}>Poste</TableCell>
             <TableCell className={classes.headCell} align="center">
               Lieu
             </TableCell>
@@ -70,11 +80,23 @@ const OffersTable = ({ offersList }) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-              key={row.id}
-              onClick={() => history.push(`/offers/${row.id}`)}
-            >
-              <TableCell component="th" scope="row">
+            <TableRow key={row.id}>
+              {environment === 'candidates' && (
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => history.push(`/offers/${row.id}`)}
+                >
+                  {row.company}
+                </TableCell>
+              )}
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ cursor: 'pointer' }}
+                onClick={() => history.push(`/offers/${row.id}`)}
+              >
                 {row.title}
               </TableCell>
               <TableCell align="center">{row.location}</TableCell>
@@ -82,7 +104,13 @@ const OffersTable = ({ offersList }) => {
                 <TableCell align="right">Editer</TableCell>
               )}
               {environment === 'companies' && (
-                <TableCell align="right">Supprimer</TableCell>
+                <TableCell
+                  align="right"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => deleteCampaign(row.id)}
+                >
+                  Supprimer
+                </TableCell>
               )}
             </TableRow>
           ))}

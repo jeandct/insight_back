@@ -20,6 +20,7 @@ const CVView = (props) => {
   const { match } = props;
   const [openModal, setOpenModal] = useState(false);
   const [filePath, setFilePath] = useState();
+  const [candidate, setCandidate] = useState();
   const [meetingDate, setMeetingDate] = useState(new Date());
   // eslint-disable-next-line no-unused-vars
   const [numPages, setNumPages] = useState(null);
@@ -80,26 +81,47 @@ const CVView = (props) => {
   useEffect(() => {
     API.get(
       `/companies/${userDetails.id}/candidates/${match.params.candidate_id}`
-    ).then((res) => setFilePath(res.data.cv));
+    ).then((res) => {
+      setFilePath(res.data.cv);
+      setCandidate({
+        firstname: res.data.firstname,
+        lastname: res.data.lastname,
+      });
+    });
   });
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleModal}>
+      <h2>
+        {candidate && candidate.firstname} {candidate && candidate.lastname}
+      </h2>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleModal}
+        style={{ margin: '0px 10px' }}
+      >
         Proposer un rendez-vous
       </Button>
-      <Button variant="outlined" color="secondary" onClick={rejectCandidate}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={rejectCandidate}
+        style={{ margin: '0px 10px' }}
+      >
         Refuser le candidat
       </Button>
-      <div style={{ height: '500px', width: '500px' }}>
-        <Document
-          file={`${process.env.REACT_APP_API_BASE_URL}/static/${filePath}`}
-          //   file={document}
-          onLoadSuccess={onDocumentLoadSuccess}
-          onError={console.error}
-        >
-          <Page pageNumber={pageNumber} />
-        </Document>
+      <div style={{ width: '90%', margin: 'auto' }}>
+        <div style={{ width: '575px', margin: '50px auto' }}>
+          <Document
+            file={`${process.env.REACT_APP_API_BASE_URL}/static/${filePath}`}
+            //   file={document}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onError={console.error}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+        </div>
       </div>
 
       <Dialog

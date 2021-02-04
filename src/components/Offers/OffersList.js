@@ -8,6 +8,7 @@ import OffersTable from './OffersTable';
 const OffersList = () => {
   const { userDetails } = useContext(UserContext);
   const [offersList, setOffersList] = useState([]);
+  const [toggleList, setToggleList] = useState(false);
 
   const history = useHistory();
 
@@ -19,12 +20,16 @@ const OffersList = () => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [toggleList]);
 
   return (
     <div>
       <h2>Mes Offres</h2>
-      <OffersTable offersList={offersList} />
+      <OffersTable
+        offersList={offersList}
+        toggleList={toggleList}
+        setToggleList={setToggleList}
+      />
       <Button
         variant="contained"
         color="primary"

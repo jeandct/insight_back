@@ -27,13 +27,17 @@ const Meetings = () => {
       return (
         <div className="meetings-container">
           <h3>Mes rendez-vous</h3>
-          {meetingsList.length === 0
-            ? 'Aucun rendez-vous prévu'
-            : meetingsList.map((meeting) => {
-                return (
+          {meetingsList.length === 0 ? (
+            <p>Aucun rendez-vous prévu</p>
+          ) : (
+            meetingsList.map((meeting) => {
+              return (
+                meeting.meeting_date && (
                   <MeetingsCard meeting={meeting} environment={environment} />
-                );
-              })}
+                )
+              );
+            })
+          )}
         </div>
       );
     }

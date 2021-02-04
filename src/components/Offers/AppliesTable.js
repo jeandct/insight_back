@@ -142,6 +142,7 @@ const AppliesTable = ({ appliesList, setToggleMeeting, toggleMeeting }) => {
           {rows.map((row) => (
             <TableRow
               key={row.id}
+              style={{ cursor: 'pointer' }}
               onClick={() => handleRedirect(row.id, row.candidateId)}
             >
               <TableCell component="th" scope="row">
