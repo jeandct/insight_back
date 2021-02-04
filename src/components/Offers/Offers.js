@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import API from '../../services/API';
 import OffersEditor from './OffersEditor';
-import './Offers.scss';
 import { UserContext } from '../../contexts/UserContext';
+import './Offers.scss';
 
 const Offers = () => {
   const { register, handleSubmit } = useForm();
   const { userDetails } = useContext(UserContext);
+  const history = useHistory();
 
   const [editorContent, setEditorContent] = useState(
     "<p>Commencer à rédiger votre offre d'emploi</p>"
@@ -15,11 +17,11 @@ const Offers = () => {
 
   const handleOfferSubmit = async (data) => {
     try {
-      const res = await API.post(`/companies/${userDetails.id}/offers`, {
+      await API.post(`/companies/${userDetails.id}/offers`, {
         ...data,
         text: editorContent,
       });
-      console.log(res);
+      history.push('/company/offers');
     } catch (err) {
       console.error(err);
     }
@@ -27,6 +29,7 @@ const Offers = () => {
 
   return (
     <div className="offers-editor">
+      <h2>Créer une offre d'emploi</h2>
       <form noValidate onSubmit={handleSubmit(handleOfferSubmit)}>
         <label htmlFor="title">
           <input
@@ -46,10 +49,12 @@ const Offers = () => {
             ref={register}
           />
         </label>
-        <OffersEditor
-          editorContent={editorContent}
-          setEditorContent={setEditorContent}
-        />
+        <div className="editor-container">
+          <OffersEditor
+            editorContent={editorContent}
+            setEditorContent={setEditorContent}
+          />
+        </div>
         <input type="submit" value="Sauvegarder" />
       </form>
     </div>

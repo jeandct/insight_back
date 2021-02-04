@@ -9,3 +9,14 @@ main {
   flex-direction: row;
   flex-wrap: nowrap;
 }
+
+.feed-container {
+  width: 70vw;
+  margin: 20px auto;
+  text-align: center;
+  h1,
+  h2 {
+    margin-bottom: 20px;
+    color: rgb(63, 81, 181);
+  }
+}

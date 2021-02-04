@@ -13,8 +13,8 @@ const OffersEditor = (props) => {
       apiKey={process.env.REACT_APP_TINY_API_KEY}
       initialValue={editorContent}
       init={{
-        height: 500,
-        content_css: 'document',
+        height: '70vh',
+        // content_css: 'document',
         statusbar: false,
         menubar: false,
 
