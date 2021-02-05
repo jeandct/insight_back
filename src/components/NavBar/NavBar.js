@@ -7,35 +7,35 @@ const NavBar = () => {
   const { environment, loggedIn } = useContext(UserContext);
 
   const showNavBar = (env) => {
-    if (env === 'candidate' && loggedIn) {
+    if (env === 'candidates' && loggedIn) {
       return (
         <div className="navbar">
           <ul>
             <li>
-              <Link to="/candidate/cv">Mes CV</Link>
+              <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="candidate/apply">Mes candidatures</Link>
+              <Link to="/candidates/cv">Mes CV</Link>
             </li>
             <li>
-              <Link to="/candidate/meetings">Mes RDV</Link>
+              <Link to="/candidates/applies">Mes candidatures</Link>
             </li>
           </ul>
         </div>
       );
     }
-    if (env === 'company' && loggedIn) {
+    if (env === 'companies' && loggedIn) {
       return (
         <div className="navbar">
           <ul>
             <li>
-              <Link to="/company/offers">Mes Offres</Link>
+              <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="company/applicants">Mes candidatures</Link>
+              <Link to="/companies/offers">Offres</Link>
             </li>
             <li>
-              <Link to="/company/meetings">Mes RDV</Link>
+              <Link to="/companies/applies">Candidats</Link>
             </li>
           </ul>
         </div>

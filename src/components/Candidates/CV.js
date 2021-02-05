@@ -36,19 +36,26 @@ const CV = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '90%', margin: 'auto' }}>
+      <h2>Mes CV</h2>
+      {filePath ? (
+        <div style={{ width: '575px', margin: '50px auto' }}>
+          <Document
+            file={`${process.env.REACT_APP_API_BASE_URL}/static/${userDetails.cv}`}
+            //   file={document}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onError={console.error}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+        </div>
+      ) : (
+        <div style={{ margin: '50px auto' }}>
+          Télécharger votre cv dès maintenant
+        </div>
+      )}
       <input type="file" onChange={(e) => setFilePath(e.target.files[0])} />
       <input type="submit" value="Envoyer" onClick={() => upload(filePath)} />
-      <div style={{ height: '500px', width: '500px' }}>
-        <Document
-          file={`${process.env.REACT_APP_API_BASE_URL}/static/${userDetails.cv}`}
-          //   file={document}
-          onLoadSuccess={onDocumentLoadSuccess}
-          onError={console.error}
-        >
-          <Page pageNumber={pageNumber} />
-        </Document>
-      </div>
     </div>
   );
 };

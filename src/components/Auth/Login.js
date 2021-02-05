@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#5ebbea',
+    backgroundColor: '#3F51B5',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
     },
     margin: theme.spacing(3, 0, 2),
-    background: '#5ebbea',
+    background: '#3F51B5',
   },
 }));
 
@@ -60,7 +60,6 @@ const SignIn = () => {
   };
 
   const handleSubmitUserLogin = async (data) => {
-    console.log(data);
     try {
       const res = await API.post(`/auth/${environment}/login`, data);
       await setUserDetails(res.data);

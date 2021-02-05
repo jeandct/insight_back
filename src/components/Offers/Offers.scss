@@ -1,0 +1,24 @@
+.offers-editor {
+  width: 70vw;
+  margin: 50px auto;
+  input {
+    margin: 0px 20px;
+  }
+}
+
+.editor-container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.offer-container {
+  text-align: initial;
+  width: 90vw;
+  margin: 0px auto 30px;
+}
+
+@media screen and (min-width: 960px) {
+  .offer-container {
+    width: 90%;
+  }
+}

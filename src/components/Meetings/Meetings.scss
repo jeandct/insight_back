@@ -1,0 +1,35 @@
+.meetings-container {
+  h3,
+  h4 {
+    color: #3f51b5;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.meetings-card {
+  border: 1px solid #3f51b5;
+  border-radius: 5px;
+  width: 50vw;
+  margin: 10px auto;
+  /* margin-bottom: 10px; */
+  font-size: 14px;
+}
+
+@media screen and (min-width: 960px) {
+  .meetings-container {
+    width: 15vw;
+    border-left: 1px solid grey;
+  }
+
+  .meetings-card {
+    border: 1px solid #3f51b5;
+    border-radius: 5px;
+    width: 90%;
+    margin: 10px auto;
+    /* margin-bottom: 10px; */
+    font-size: 14px;
+  }
+}
